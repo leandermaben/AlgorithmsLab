@@ -64,7 +64,6 @@ int gcd(int x,int y){
 	int res=1;
 	int max=(x>y)?x:y;
 	int min=(x<y)?x:y;;
-	printf("%d",max);
 	int*s=sieve(max);
 	int*p=prime(s,max);
 	int* f1=factors(p,x);
