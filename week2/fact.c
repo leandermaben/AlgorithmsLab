@@ -1,6 +1,10 @@
 #include<stdio.h>
 #include<stdlib.h>
-#include<math.h>
+
+
+//To plot the graph
+
+
 int op;
 int* sieve(int x){
 	int i,j;
@@ -34,7 +38,6 @@ int* prime(int* s,int x){
 		op++;
 	}
 	p[0]=len;
-	printf("opcount is %d\n",op);
 	return p;
 }
 int* factors(int* p,int x){
@@ -77,8 +80,18 @@ int gcd(int x,int y){
 	return res;
 }
 int main(){
-	int x,y;
-	printf("\nEnter numbers");
-	scanf("%d %d",&x,&y);
-	printf("m+n is %d GCD is %d",x+y,gcd(x,y));
+	int fact[20],i;
+	fact[0]=0;
+	fact[1]=1;
+	for(i=2;i<20;i++){
+		fact[i]=fact[i-1]+fact[i-2];
+	}
+	for(i=1;i<19;i++){
+		gcd(fact[i],fact[i+1]);
+		printf("\n%d",op);
+	}
+	printf("\n\n");
+	for(i=1;i<19;i++){
+		printf("\n %d",fact[i]+fact[i+1]);
+	}
 }
