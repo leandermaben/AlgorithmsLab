@@ -1,12 +1,15 @@
 #include<stdio.h>
 #include <stdlib.h>
+int opcount;
 void exhaustive(int** s,int c[][100],int* t,int k,int n,int sum,int* x){
 	int i;
 	for(i=0;i<n;i++){
+		opcount++;
 		if(k==n-1){
 			if(t[i]==0){
 				s[*x][k+1]=sum+c[k][i];
-				s[*x++][k]=c[k][i];
+				s[*x][k]=c[k][i];
+				*x=*x+1;
 				return;
 			}
 		}
@@ -42,16 +45,31 @@ int main(){
 	for(i=0;i<n;i++)
 		t[i]=0;
 	int x=0;
+	for(i=0;i<lim;i++){
+		for(int j=0;j<n+1;j++){
+			s[i][j]=-1;
+		}
+	}
 	exhaustive(s,c,t,0,n,0,&x);
-	int max=s[0][n],ind=0;
+	int min=s[0][n],ind=0;
 	for(i=1;i<lim;i++){
-		if(max<s[i][n]){
-			max=s[i][n];
+		if(min>s[i][n]){
+			min=s[i][n];
 			ind=i;
 		}
 	}
+	for(i=0;i<lim;i++){
+		for(int j=0;j<n+1;j++){
+			if(s[i][j]==-1)
+				s[i][j]=s[i-1][j];
+			printf("\t%d",s[i][j]);
+		}
+		printf("\n");
+	}
+	printf("\n\n");
 	for(i=0;i<n;i++){
 		printf("\t%d",s[ind][i]);
 	}
-	printf("\nMax is %d",s[ind][n]);
+	printf("\nMin is %d",s[ind][n]);
+	printf("opcount is %d",opcount);
 }

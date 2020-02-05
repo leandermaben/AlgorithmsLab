@@ -50,6 +50,7 @@ void list(graph* g,int vn,int en,int* v,int e[][2]){
 }
 void dfs(int** mat,int* s,int n,int u,int **t,int* k){
 	s[u]=1;
+	printf("\nPushing %d",u);
 	for(int j=0;j<n;j++){
 		if(mat[u][j]==1){
 			if(s[j]!=1){
@@ -57,6 +58,7 @@ void dfs(int** mat,int* s,int n,int u,int **t,int* k){
 				t[*k][1]=j;
 				(*k)++;
 				dfs(mat,s,n,j,t,k);
+				printf("\nPopping %d",j);
 			}
 		}
 	}
@@ -106,6 +108,10 @@ int main(){
 		s[i]=0;
 	}
 	dfs(g->mat,s,g->n,source,t,&k);
+	for(int i=0;i<vn;i++){
+		if(i!=source)
+			dfs(g->mat,s,g->n,i,t,&k);
+	}
 	for(i=0;i<k;i++){
 		printf("%d\t%d",t[i][0],t[i][1]);
 		printf("\n");
