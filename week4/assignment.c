@@ -27,6 +27,7 @@ long fact(int x){
 	return x*fact(x-1);
 }
 int main(){
+	opcount=0;
 	int n,c[100][100],i,j;
 	printf("\nEnter number of elements");
 	scanf("%d",&n);

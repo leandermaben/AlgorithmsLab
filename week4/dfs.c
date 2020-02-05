@@ -108,12 +108,14 @@ int main(){
 		s[i]=0;
 	}
 	dfs(g->mat,s,g->n,source,t,&k);
+	printf("\nPopping %d",source);
 	for(int i=0;i<vn;i++){
-		if(i!=source)
+		if(i!=source && s[i]!=1){
 			dfs(g->mat,s,g->n,i,t,&k);
+			printf("\nPopping %d",i);
+		}
 	}
 	for(i=0;i<k;i++){
-		printf("%d\t%d",t[i][0],t[i][1]);
-		printf("\n");
+		printf("\n%d\t%d",t[i][0],t[i][1]);
 	}
 }
