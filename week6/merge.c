@@ -1,14 +1,18 @@
 #include<stdio.h>
 #include<stdlib.h>
+int opcount=0;
 void merge(int*f,int fn,int* l,int ln,int*a,int n){
 	int i=0,j=0,k=0,m;
 	while(j!=fn&&k!=ln){
 		if(f[j]<l[k]){
 			a[i++]=f[j++];
+			opcount++;
 		}else if(f[j]==l[k]){
 			a[i++]=f[j++];
 			a[i++]=l[k++];
+			opcount++;
 		}else{
+			opcount++;
 			a[i++]=l[k++];
 		}
 	}
@@ -48,4 +52,5 @@ int main(){
 	for(i=0;i<n;i++){
 		printf("\t%d",a[i]);
 	}
+	printf("\nOpcount is %d",opcount);
 }
