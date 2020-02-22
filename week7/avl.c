@@ -55,7 +55,12 @@ void balance(int key,node** root,stack* s){
 	do{
 		temp1=s->a[(s->tos)--];
 		fac=balance_factor(temp1);
-	}while(fac<2 && fac>-2&&s->tos!=-1);nf(fac==0)
+	}while(fac<2 && fac>-2&&s->tos!=-1);
+	if(s->tos!=-1)
+		par=s->a[(s->tos)--];
+	else
+		par=NULL;
+	if(fac==0)
 		return;
 	else if(fac>1&&key<temp1->left->data){
 		rightRotate(temp1,root,par);
@@ -111,7 +116,7 @@ void inorder(node* root){
 	if(!root)
 		return;
 	inorder(root->left);
-	printf("\t%d-%d",root->data,root->height);
+	printf("\t%d",root->data);
 	inorder(root->right);
 }
 void preorder(node* root){
