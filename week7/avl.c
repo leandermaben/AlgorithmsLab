@@ -6,10 +6,6 @@ typedef struct node{
 	struct node* right;
 	int height;
 }node;
-typedef struct post{
-	node* cur;
-	int flag;
-}post;
 typedef struct stack{
 	node* a[100];
 	int tos;
@@ -110,23 +106,7 @@ void balance(int key,node** root,stack* s){
 		leftRotate(temp1,root,par);
 	}
 }
-void update(node* root){
-	int left,right;
-	if(!root)
-		return;
-	update(root->left);
-	update(root->right);
-	if(root->left==NULL)
-		left=0;
-	else
-		left=root->left->height;
-	if(root->right==NULL)
-		right=0;
-	else
-		right=root->right->height;
-	root->height=1+max(left,right);
-}
-void update1(node* root,stack* s){
+void update(node* root,stack* s){
 	node* temp;
 	int right,left;
 	while(s->tos!=-1){
@@ -140,7 +120,6 @@ void update1(node* root,stack* s){
 		else
 			right=0;
 		temp->height=1+max(left,right);
-		printf("\n%d-%d",temp->data,temp->height);
 	}
 }
 void insert(node** root,int data){
@@ -171,7 +150,7 @@ void insert(node** root,int data){
 		t=s;
 		t2=s;
 		t2.a[++(t2.tos)]=temp;
-		update1(*root,&t);
+		update(*root,&t);
 		balance(data,root,&s);
 	}
 }
