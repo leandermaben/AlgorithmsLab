@@ -2,16 +2,16 @@
 #include<stdlib.h>
 int opcount=0;
 int partition(int* a,int start,int n){
-	int p=a[start],j=n-1,i=start,temp,k;
+	int p=a[start],j=n-1,i=start+1,temp,k;
 	while(1){
-		do{
+		while(i<n&&a[i]<p){
 			i++;
 			opcount++;
-		}while(i<n&&a[i]<p);
-		do{
+		}
+		while(a[j]>p){
 			j--;
 			opcount++;
-		}while(a[j]>p);
+		}
 		if(i<j){
 			temp=a[i];
 			a[i]=a[j];
